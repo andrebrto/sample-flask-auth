@@ -76,9 +76,10 @@ def update_user(id_user):
     if user and data.get("password"):
         user.password = data.get("password")
         db.session.commit()
-        return jsonify({"message": "Usuario atualizado com sucesso"}) , 200
+        return jsonify({"message": f"Usuario {id_user} atualizado com sucesso"}) , 200
     
     return jsonify({"message": "Usuario nao encontrado"}) , 404
+
 @app.route("/")
 def hello_world():
     return "HELLO WOLRD"
