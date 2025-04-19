@@ -80,6 +80,20 @@ def update_user(id_user):
     
     return jsonify({"message": "Usuario nao encontrado"}) , 404
 
+@app.route("/user/<int:id_user>",methods=["DELETE"])
+def delete_user(id_user):
+    user = User.query.get(id_user)
+    if id_user == current_user.id:
+        return jsonify({"message": "Deleção nao permitida"}), 403
+
+    if user:
+        db.session.delete(user)
+        db.session.commit() 
+        return jsonify({"message": "Usuario Deletado com Sucesso"}) , 200
+    
+    return jsonify({"message": "Usuario não Encontrado"})
+
+
 @app.route("/")
 def hello_world():
     return "HELLO WOLRD"
